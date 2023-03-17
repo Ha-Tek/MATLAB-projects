@@ -8,7 +8,7 @@ References:
 Tekile, H. A., Brunelli, M., & Fedrizzi, M. (2023). A numerical comparative study of completion methods for pairwise comparison matrices. Operations Research Perspectives, 100272.
 Ergu, D.; Kou, G.; Peng, Y.; Zhang, M. Estimating the missing values for the incomplete decision matrix and consistency optimization in emergency management. Appl. Math. Model. 2016, 40, 254–267
 
-clear; close; clc
+[clear; close; clc
 
 % global variables
 global A;
@@ -102,7 +102,7 @@ for i = 1:n
 end
 LSM;
 
-end
+end](url)
 
 
 
