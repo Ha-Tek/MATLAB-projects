@@ -25,4 +25,10 @@ Missing  elements  of the  incomplete matrix A  are obtained by taking the geome
 Reference: 
 1. Tekile, H. A., Brunelli, M., & Fedrizzi, M. (2023). A numerical comparative study of completion methods for pairwise comparison matrices. Operations Research Perspectives, 100272.
 
+# The DEMATEL-based completion method for incomplete PCMs in AHP
 
+The DEMATEL-based completion method provides a new perspective to estimate the missing values in iPCMs with explicit physical meaning: calculate the indirect relation of two alternatives/criteria if their relative importance (i.e. direct relation) is unknown.
+
+References:
+1. Zhou, X., Hu, Y., Deng, Y., Chan, F. T., & Ishizaka, A. (2018). A DEMATEL-based completion method for incomplete pairwise comparison matrix in AHP. Annals of Operations Research, 271, 1045-1066.
+2.  Tekile, H. A., Brunelli, M., & Fedrizzi, M. (2023). A numerical comparative study of completion methods for pairwise comparison matrices. Operations Research Perspectives, 100272.
