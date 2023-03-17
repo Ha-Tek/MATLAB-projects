@@ -12,6 +12,7 @@ The constraints are:
 1. 1/9 <=x(i)/x(j)<=9, for i,j=1,2,3,4,...,n by considering i<j.
 2. x(1) + x(2) + x(3) + x(4) +...+x(n)= 1;
 3. x(i) > 0 for i=1,2,3,4,...,n
+
 Reference: 
 1. Tekile, H. A., Brunelli, M., & Fedrizzi, M. (2023). A numerical comparative study of completion methods for pairwise comparison matrices. Operations Research Perspectives, 100272.
 
