@@ -18,6 +18,11 @@ Reference:
 
 
 
+# Connecting Pathes Method
 
+Missing  elements  of the  incomplete matrix A  are obtained by taking the geometric mean of intensities of all connecting paths  connecting the two alternatives i and j in A
+
+Reference: 
+1. Tekile, H. A., Brunelli, M., & Fedrizzi, M. (2023). A numerical comparative study of completion methods for pairwise comparison matrices. Operations Research Perspectives, 100272.
 
 
