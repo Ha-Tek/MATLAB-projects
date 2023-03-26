@@ -1,0 +1,103 @@
+% An example of a constrained eigenvalue problem which is taken from the following paper based on the interval constraint 5<=x_1<=7 and 1/9<=x_2<=9.
+% Reference: Tekile, H. A., Fedrizzi, M., & Brunelli, M. (2021). Constrained eigenvalue minimization of incomplete pairwise comparison matrices by nelder-mead algorithm. Algorithms, 14(8), 222.
+
+% Author: Hailemariam Abebe Tekile, June 17, 2021
+
+
+
+clear; close; clc
+
+% Global variables
+global A;
+global n;
+global tPosition;
+global numberOfMissingEntries;
+
+%% Example of an incomplete PCM, where 0 indicates the missing entries.
+A=[...
+ 1 0 1/3 1;...
+0 1 1/9 0;...
+3 9 1 3;...
+1 0 1/3 1];
+
+n = size(A,2); %size of A
+
+numberOfMissingEntries = 2;
+
+% Here the vectors are represented in logarithic form due to the Perron eigenvalue problem formulation using exponential parametrization x = exp(t).
+x_init=log([6 1]); % initial value
+lb=log([5 1/9]); % lower bound
+ub=log([7 9]);   % upper bound
+
+% % Plot the final objective function values versus iteration number
+%opts = optimset('TolX',1e-4,'TolFun',1e-4,'MaxIter',100); %without plot
+opts = optimset('Display','iter','PlotFcns',@optimplotfval,'TolX',1e-4,'TolFun',1e-4,'MaxIter',100);
+[t, fmin] = ANMS(@objFunction, x_init, lb, ub, opts) %xmin is replaced by x (even it was possible by t)
+
+x = exp(t) %replace x by exp(t), bc of eponential parametrization 
+fmin % objective value for the constrained problem
+
+for r = 1:numberOfMissingEntries
+    A(tPosition(r,1),tPosition(r,2)) = x(r);
+    A(tPosition(r,2),tPosition(r,1)) = 1/x(r);
+end
+
+B = A; % the reconstructed PCM
+disp(B)
+
+
+function [lambdaMax] = objFunction(t)
+    global A;
+    global tPosition;
+    global numberOfMissingEntries;
+    global n;
+
+    index=1;
+    for j = 2:n % for i < j
+        for i = 1:j-1
+            if A(i,j) == 0
+                tPosition(index,1) = i; % position of t in the ith row
+                tPosition(index,2) = j; % position of t in the jth column
+                index = index+1; % update index until (A(i,j) == 0) ends
+            end
+        end
+    end
+
+    for r = 1:numberOfMissingEntries
+        A(tPosition(r,1),tPosition(r,2)) = exp(t(r)); % put exp(t) in the position (i,j);
+        A(tPosition(r,2),tPosition(r,1)) = exp(-t(r)); % put exp(-t) in the position (j,i)
+    end
+
+    lambdaMax= max(eig(A));
+end
+
+
+function [xmin, fmin] = ANMS(myfunction, x_init, lb, ub, opts) 
+% myfunction: objective function to minimize
+% x_init: initial guess for the optimization variables
+% lb: lower bounds for the optimization variables
+% ub: upper bounds for the optimization variables
+% opts: options for the optimization algorithm
+% TolX, TolFun are implemented inside fminsearch by default by putting them in opts
+
+% Inverse coordinate transformation to obtain z0
+x0 = x_init(:)';
+z0 = zeros(size(x0));
+for i = 1:numel(x0)
+    z0(i) = asin(2*(x0(i) - lb(i))/(ub(i) - lb(i)) - 1) + 2*pi;
+end
+
+% Objective function with transformed variables
+myfunction_z = @(z) myfunction((ub - lb)/2 .* (sin(z) + 1) + lb);
+
+%% Nelder-Mead optimization algorithm
+% xmin_z = minimum solution for the unconstrained problem 
+% and fmin_z is its corresponding objective value.
+[xmin_z, fmin_z] = fminsearch(myfunction_z, z0, opts);
+
+% Forward coordinate transformation to obtain xmin
+xmin = (ub - lb)/2 .* (sin(xmin_z) + 1) + lb;
+fmin = feval(myfunction, xmin);
+end
+
+
