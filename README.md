@@ -1,3 +1,19 @@
+# Nelder-Mead algorithm Implementation for Incomplete Pairwise Comparison Matrices
+
+Author: Hailemariam Abebe Tekile, June 17, 2021
+
+Nelde-Mead algorithm using the techniques of coordinate transformation for the optimal completion of incomplete pairwise comparison matrices.
+I used simply MATLAB's fminsearch (equivalent to the standard Nelder-Mead algorithm) along with the coordinate transformation.
+ 
+An example of a constrained eigenvalue problem which is taken from the following paper based on the interval constraint 5<=x_1<=7 and 1/9<=x_2<=9.
+
+Reference: Tekile, H. A., Fedrizzi, M., & Brunelli, M. (2021). Constrained eigenvalue minimization of incomplete pairwise comparison matrices by Nelder-Mead algorithm. Algorithms, 14(8), 222.
+
+
+Implementation of the MATLAB code: One can modify only the incomplete pairwise comparison matrix (A),  the number of missing entries (numberOfMissingEntries) and the lowe bound (lb) and upper bound (ub). Then, run the code.
+
+
+
 # Ergu et al.'s 2016  Least Square Method (LSM) using fmincon :
 
 This method is used to find the optimal values of missing comparisons by minimizing the sum of errors (geometric mean induced bias matrix (GMIBEM) ) subject to the interval constraint [1/9,9].
