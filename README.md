@@ -1,4 +1,4 @@
-# Incomplete Pairwise Comparison Matrix Completion Methods
+# MATLAB Research projects for Incomplete Pairwise Comparison Matrix Completion Methods
 
 This repository contains MATLAB implementations of several methods for completing **incomplete pairwise comparison matrices (iPCMs)** in the context of the **Analytic Hierarchy Process (AHP)**.
 
